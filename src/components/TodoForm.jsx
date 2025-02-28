@@ -3,18 +3,19 @@ import { useState } from "react";
 
 const TodoForm = (props) => {
   const [title, setTitle] = useState("");
-  const [description, setDescreption] = useState("");
+  const [description, setDescription] = useState("");
 
   const passTodoToApp = () => {
     if (title) {
-      props.addNewTodo({
+      const obj = {
+        title: title,
+        description: description,
         id: Date.now(),
-        title,
-        description,
         completed: false,
-      });
+      };
+      props.onAddTodo(obj);
       setTitle("");
-      setDescreption("");
+      setDescription("");
     }
   };
 
@@ -43,7 +44,7 @@ const TodoForm = (props) => {
           id="descreption"
           className="form-control"
           value={description}
-          onChange={(e) => setDescreption(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </div>
       <div className="d-flex justify-content-center ">
